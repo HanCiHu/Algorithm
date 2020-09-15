@@ -35,27 +35,24 @@ int main(){
 	int ret = map[0][0];
 	int cur = 0;
 	int cur1 = 0;
-	int cur2 = 0;
 
 	for (int i = 0; i < b; i++){
 		for (int di = i; di < b; di++){
 			for (int j = 0; j < b; j++){
 				for (int dj = j; dj < b; dj++){
-
-					if (di == 0 && dj > 0){
-						cur = map[di][dj] - map[di][j];
+					cur = map[di][dj];
+					if (i > 0 && j > 0){
+						cur1 = cur - map[i - 1][dj] - map[di][j - 1] + map[i - 1][j - 1];
 					}
-					else if (dj == 0 && di > 0){
-						cur = map[di][dj] - map[i][dj];
+					else if (i > 0){
+						cur1 = cur - map[i - 1][dj];
 					}
-					else{
-						cur2 = map[di][dj] - map[di][j];
-						cur1 = map[di][dj] - map[i][dj];
-						cur = map[di][dj] - map[di - 1][dj] - map[di][dj - 1] + map[di - 1][dj - 1];
+					else if (j > 0){
+						cur1 = cur - map[di][j - 1];
 					}
 
-					if (max(cur,cur1,cur2) > ret)
-						ret = max(cur,cur1,cur2);
+					if (cur > ret || cur1 > ret)
+						ret = cur > cur1 ? cur : cur1;
 				}
 			}
 		}
