@@ -6,14 +6,14 @@ def func(coin_list, target):
 		coins = list()
 		for i in coin_list:
 			if i <= target:
-				conis.append(i)
+				coins.append(i)
 		for i in coins:
-			num_coins = func(coin_list, target - i)
+			num_coins = 1 + func(coin_list, target - i)
 			if num_coins < min_coins:
 				min_coins = num_coins
 	return min_coins
 
 
-coins = list(map(int, input().split(' ')))
+coin_list = list(map(int, input().split(' ')))
 total = int(input())
-print(func(coins,total))
+print(func(coin_list,total))
