@@ -15,3 +15,4 @@ for i in a:
 
 for i in range(0,len(lst),2):
 	print(lst[i], lst[i + 1])
+	

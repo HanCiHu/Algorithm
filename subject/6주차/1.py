@@ -1,8 +1,6 @@
 a = input().split(' ')
 b = input().split(' ')
-
 ret = dict()
-
 lst = []
 
 for i in a:
