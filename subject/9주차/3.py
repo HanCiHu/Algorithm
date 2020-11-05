@@ -31,7 +31,6 @@ def kruskal(vertex_list, edge_list):
 	mst = []
 	sum = 0
 
-
 	for e in edges:
 		cost, u, v = e
 		if find(u) != find(v):
