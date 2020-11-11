@@ -10,9 +10,6 @@ def dfs(d, target):
 		if visit[i] == 0:
 			dfs(d,i)
 
-
-
-
 for i in range(n):
 	d[arr[i]] = list()
 	visit[arr[i]] = 0
