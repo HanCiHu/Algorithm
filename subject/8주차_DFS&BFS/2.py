@@ -1,14 +1,22 @@
+from collections import deque
+
 n,m = map(int, input().split(' '))
 arr = list(map(str, input().split(' ')))
 d = dict()
 visit = dict()
 
-def dfs(d, target):
+def bfs(d,target):
+	q = deque()
+	q.append(target)
 	visit[target] = 1
-	print(target,end=" ")
-	for i in d[target]:
-		if visit[i] == 0:
-			dfs(d,i)
+
+	while len(q) != 0:
+		a = q.popleft()
+		print(a,end=" ")
+		for i in d[a]:
+			if visit[i] == 0:
+				q.append(i)
+				visit[i] = 1
 
 for i in range(n):
 	d[arr[i]] = list()
@@ -25,4 +33,4 @@ target = input()
 for i in d.keys():
 	d[i].sort()
 
-dfs(d,target)
+bfs(d,target)
