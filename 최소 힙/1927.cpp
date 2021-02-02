@@ -1,19 +1,19 @@
 #include<queue>
-#include<iostream>
+#include<cstdio>
 
 using namespace std;
 
 int main(){
 	priority_queue<int, vector<int>, greater<int> > q;
 	int n,m;
-	cin >> n;
+	scanf("%d",&n);
 	while (n--){
-		cin >> m;
+		scanf("%d",&m);
 		if (m > 0) q.push(m);
 		else{
-			if (q.empty()) cout << "0" << "\n";
+			if (q.empty()) printf("0\n");
 			else{
-				cout << q.top() << "\n";
+				printf("%d\n",q.top());
 				q.pop();
 			}
 		}
