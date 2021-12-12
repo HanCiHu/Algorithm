@@ -1,5 +1,0 @@
-3
-Algorithm with Coding Test
-2020
-Hello World!
-
