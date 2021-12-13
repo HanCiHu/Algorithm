@@ -12,7 +12,7 @@ def countPair():
 			break
 	if (student == -1): return 1
 
-	for i in range(len(visit)):
+	for i in range(student, len(visit), 1):
 		if (not visit[i] and isFriend[i][student]):
 			visit[i] = visit[student] = True
 			count += countPair()
