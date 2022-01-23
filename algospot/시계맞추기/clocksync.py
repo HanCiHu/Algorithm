@@ -8,23 +8,31 @@ switch = [[0,1,2], [3, 7, 9, 11],
 
 INF = 1000
 
+def push(clocks, switchIdx):
+	for i in switch[switchIdx]:
+		clocks[i] += 3
+		if clocks[i] >= 15:
+			clocks[i] = 3
+
 def checkClcock(clocks):
 	for hour in clocks:
 		if (hour != 12):
 			return False
 	return True
 
-def clickSwitch(switchIdx):
-	if checkClcock(clocks):
-		return count
+def solve(clocks, switchIdx):
+	if switchIdx == 10:
+		if checkClcock(clocks):
+			return 0
+		return INF
 	minCount = INF
-	if (switchIdx == 10):
-		return minCount
 	for i in range(4):
-		minCount = min(clickSwitch(switchIdx + 1), count)
+		minCount = min(i + solve(clocks, switchIdx + 1), minCount)
+		push(clocks, switchIdx)
+
 	return minCount
 
 for _ in range(C):
-	clocks = [map(int, input().split())]
-	count = clickSwitch(0)
+	clocks = list(map(int, input().split()))
+	count = solve(clocks, 0)
 	print(-1 if count == INF else count)
