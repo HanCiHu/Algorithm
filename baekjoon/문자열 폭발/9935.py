@@ -1,13 +1,14 @@
-s = input()
+string = list(input())
 bomb = input()
+length = len(bomb)
+stack = []
 
-origin = s
-s = origin.replace(bomb, '')
-while s != origin:
-  origin = s
-  s = origin.replace(bomb, '')
+for char in string:
+  stack.append(char)
+  if ''.join(stack[-length:]) == bomb:
+    del stack[-length:]
 
-if s == '':
+if (len(stack) == 0):
   print("FRULA")
 else:
-  print(s)
+  print(''.join(stack))
