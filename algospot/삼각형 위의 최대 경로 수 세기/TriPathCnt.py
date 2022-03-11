@@ -18,7 +18,19 @@ for _ in range(T):
         cost[i][j] = tri[i][j] + cost[i - 1][j - 1]
         cnt[i][j] = cnt[i - 1][j - 1]
       else:
-        cost[i][j] = max(cost[i - 1][j - 1], cost[i - 1][j]) + tri[i][j]
+        if cost[i - 1][j - 1] > cost[i - 1][j]:
+          cost[i][j] = cost[i - 1][j - 1] + tri[i][j]
+          cnt[i][j] = cnt[i - 1][j - 1]
+        elif cost[i - 1][j - 1] < cost[i - 1][j]:
+          cost[i][j] = cost[i - 1][j] + tri[i][j]
+          cnt[i][j] = cnt[i - 1][j]
+        else:
+          cost[i][j] = cost[i - 1][j] + tri[i][j]
+          cnt[i][j] = cnt[i - 1][j] + cnt[i - 1][j - 1]
+  max_val = max(cost[n - 1])
+  ans = 0
 
-  for i in cost:
-    print(i)
+  for i in range(n):
+    if cost[n - 1][i] == max_val:
+      ans += cnt[n - 1][i]
+  print(ans)
