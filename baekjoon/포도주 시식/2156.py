@@ -1,16 +1,13 @@
-def func(i, flag):
-  if (flag == 2):
-    return func(i + 1, 0)
-  if (i == n - 1):
-    return cups[i]
-  if (i >= n):
-    return 0
-
-  amount1 = cups[i] + func(i + 1, flag + 1)
-  amount2 = func(i + 1, flag)
-
-  return max(amount1, amount2)
-
 n = int(input())
-cups = [int(input()) for _ in range(n)]
-print(func(0,0))
+
+juice = [int(input()) for _ in range(n)]
+dp = [0 for _ in range(n)]
+
+dp[0] = juice[0]
+if n > 1: dp[1] = juice[0] + juice[1]
+if n > 2 : dp[2] = max(juice[0] + juice[2], juice[1] + juice[2], dp[1])
+
+for i in range(3, n):
+  dp[i] = max(juice[i] + juice[i - 1] + dp[i - 3], juice[i] + dp[i - 2] , dp[i - 1])
+
+print(dp[n - 1])
