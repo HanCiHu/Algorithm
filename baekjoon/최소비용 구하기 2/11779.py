@@ -1,4 +1,7 @@
 import heapq
+import sys
+
+input = sys.stdin.readline
 
 N = int(input())
 M = int(input())
@@ -6,7 +9,8 @@ M = int(input())
 INF = float('INF')
 
 graph = [[] for _ in range(N + 1)]
-distance = [[INF, []] for _ in range(N + 1)]
+distance = [INF for _ in range(N + 1)]
+path = [-1 for _ in range(N + 1)]
 
 for _ in range(M):
 	start, end, weight = map(int, input().split(' '))
@@ -14,8 +18,7 @@ for _ in range(M):
 
 start, end = map(int, input().split(' '))
 
-distance[start][0] = 0
-distance[start][1] += [start]
+distance[start] = 0
 
 q = []
 heapq.heappush(q, (0, start))
@@ -23,17 +26,24 @@ heapq.heappush(q, (0, start))
 while q:
 	weight, vertex = heapq.heappop(q)
 
+	if weight > distance[vertex]: continue
+
 	for w, v in graph[vertex]:
-		if distance[v][0] > distance[vertex][0] + w:
-			distance[v][0] = distance[vertex][0] + w
-			distance[v][1] = [vertex]
-			heapq.heappush(q, (distance[v][0], v))
+		if distance[v] > distance[vertex] + w:
+			distance[v] = distance[vertex] + w
+			path[v] = vertex
+			heapq.heappush(q, (distance[v], v))
 
-print(distance[end][0])
+print(distance[end])
 
-answer = []
+answer = [end]
 
 node = end
 
-while node != start:
-	
+while path[node] != -1:
+	answer.append(path[node])
+	node = path[node]
+
+print(len(answer))
+for i in answer[::-1]:
+	print(i, end=' ')
