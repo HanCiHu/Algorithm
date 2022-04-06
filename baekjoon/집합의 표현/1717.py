@@ -7,8 +7,9 @@ N, M = map(int, input().split(' '))
 parents = [i for i in range(N + 1)]
 
 def find(a):
-  if a != parents[a]:
-    parents[a] = find(parents[a])
+  if a == parents[a]:
+    return a
+  parents[a] = find(parents[a])
   return parents[a]
 
 def union(a, b):
