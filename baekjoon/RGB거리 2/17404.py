@@ -7,23 +7,19 @@ for i in range(N):
 	r,g,b = map(int, input().split(' '))
 	house.append([r,g,b])
 
-def func(prev, i):
-	if i == N - 1:
-		return 0
+ans = INF
 
-	ans1 = func(0, i + 1) + house[i][0]
-	ans2 = func(1, i + 1) + house[i][1]
-	ans3 = func(2, i + 1) + house[i][2]
+for i in range(3):
+	dp = [[INF, INF, INF] for _ in range(N)]
+	dp[0][i] = house[0][i]
 
-	if prev == 0:
-		return min(ans2, ans3)
-	elif prev == 1:
-		return min(ans1, ans3)
-	else:
-		return min(ans1, ans2)
+	for j in range(1, N, 1):
+		dp[j][0] = min(dp[j - 1][1], dp[j - 1][2]) + house[j][0]
+		dp[j][1] = min(dp[j - 1][0], dp[j - 1][2]) + house[j][1]
+		dp[j][2] = min(dp[j - 1][0], dp[j - 1][1]) + house[j][2]
+	
+	for j in range(3):
+		if i != j:
+			ans = min(ans, dp[-1][j])
 
-ans1 = func(0, 1) + house[0][0]
-ans2 = func(1, 1) + house[0][1]
-ans3 = func(2, 1) + house[0][2]
-
-print(ans1, ans2, ans3)
+print(ans)
