@@ -1,12 +1,7 @@
-# BaekJoon_Algorithm
-solved problems in https://www.acmicpc.net/
-# AlgoSpot
-solved problems in https://www.algospot.com/
-# programmers
-solved problems in https://programmers.co.kr/
-# Blog
-Velog : https://velog.io/@hancihu/
-# Since
-2020.02.20~
+|BaekJoon_Algorithm|AlgoSpot|programmers|
+| ------------- | ------------- | ------------- |
+|[Link](https://www.acmicpc.net/)|[Link](https://www.algospot.com/)|[Link](https://programmers.co.kr/)
 
-
+### TMI
+- share my solution explanation in [velog](https://velog.io/@hancihu/)
+- solved since 2020.02.20~
