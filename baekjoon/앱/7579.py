@@ -5,12 +5,16 @@ N, M =map(int, input().split(' '))
 mem = list(map(int, input().split(' ')))
 cost = list(map(int, input().split(' ')))
 
-dp = [INF for _ in range(M + 1)]
+size = sum(cost)
+ans = size
 
-for i in cost:
-	for j in range(M, i + 1, -1):
-		if dp[j - i] != INF:
-			dp[j] = min(dp[j - i] + i, dp[j])
-		else:
-			dp[j] = min(i, dp[j])
-print(dp[M])
+dp = [[0 for _ in range(size + 1)] for _ in range(N)]
+
+for i in range(N):
+	m = mem[i]
+	c = cost[i]
+
+	for j in range(1, size + 1, 1):
+		if j < c:
+			dp[i][j] = dp[i - 1][j]
+
