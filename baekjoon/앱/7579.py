@@ -1,20 +1,25 @@
-INF = float('inf')
 
-N, M =map(int, input().split(' '))
 
-mem = list(map(int, input().split(' ')))
-cost = list(map(int, input().split(' ')))
+N, M = map(int, input().split(' '))
 
-size = sum(cost)
-ans = size
+mem = [0] + list(map(int, input().split(' ')))
+cost = [0] + list(map(int, input().split(' ')))
 
-dp = [[0 for _ in range(size + 1)] for _ in range(N)]
+s = sum(cost) + 1
+dp = [[0 for _ in range(s)] for _ in range(N + 1)]
 
-for i in range(N):
-	m = mem[i]
-	c = cost[i]
 
-	for j in range(1, size + 1, 1):
-		if j < c:
-			dp[i][j] = dp[i - 1][j]
+for i in range(1, N + 1):
+  for j in range(s):
+    if cost[i] <= j:
+      dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - cost[i]] + mem[i])
+    else:
+      dp[i][j] = dp[i - 1][j]
 
+ans = float('inf')
+
+for i in range(1, len(dp)):
+  for j in range(1, len(dp[i])):
+    if dp[i][j] >= M:
+      ans = min(ans, j)
+print(ans)
