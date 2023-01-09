@@ -1,10 +1,7 @@
 dis = [10,20,30,40]
 
-ans1 = 0
-ans2 = 0
-
 def btk(users, emoticons, discounts, i, n):
-  global ans1, ans2
+  ret = [0, 0]
   if i == n:
     p = 0
     money = 0
@@ -17,23 +14,22 @@ def btk(users, emoticons, discounts, i, n):
         p += 1
       else:
         money += m
-    if ans1 < p:
-      ans1 = p
-      ans2 = money
-    elif ans1 == p and money > ans2:
-      ans2 = money
-    return 
+    if ret[0] < p:
+      ret[0] = p
+      ret[1] = money
+    elif ret[0] == p and money > ret[1]:
+      ret[1] = money
+    return [ret[0], ret[1]]
+
   for j in range(4):
     temp = discounts.copy()
     temp.append((emoticons[i], dis[j]))
-    ans = btk(users, emoticons, temp, i + 1, n)
-  return
+    ret = max(ret, btk(users, emoticons, temp, i + 1, n))
+  
+  return ret
 
 def solution(users, emoticons):
-  global ans1, ans2
-  ans1 = 0
-  ans2 = 0
-  btk(users, emoticons, [], 0, len(emoticons))
-  return [ans1, int(ans2)]
+  ret = btk(users, emoticons, [], 0, len(emoticons))
+  return [ret[0], int(ret[1])]
 
 print(solution([[40, 10000], [25, 10000]]	, [7000, 9000]	))
